@@ -7,6 +7,8 @@ After installing the project, you can run the following to start the app `npm ru
 
 this will start a local server at http://localhost:5173/
 
+You can also see a demo [here](https://lotech-task.vercel.app/)
+
 ## Project notes
 
 I chose React + Vite for this project, as it is my goto technology for a quick webpage.
