@@ -13,21 +13,23 @@ You can also see a demo [here](https://lotech-task.vercel.app/)
 
 I chose React + Vite for this project, as it is my goto technology for a quick webpage.
 
-When I saw how quick the webSocket messages were, I realised I would need to do something differently.
+When I saw how quick the webSocket messages were, I realised I would need to do something differently. The usual pattern of using sideeffects and state to update with new data wouldn't work well.
 
-I tried to move the receiving and processing of messages to a webworker, which sat outside the regular flow of the app. Too quick updates could cause continuous rerenders of components the app to freeze and crash quickly. In my webworker I created a queue which receives messages as they arrive from the websocket connection and format the data as needed, and sends the queue back to the react UI at regular intervals (currently set at 1 second). 
+I tried to move the receiving and processing of messages to a webworker, which sat outside the regular flow of the app. Too many and too quick updates could cause continuous rerenders of components the app to freeze and crash quickly. In my webworker I created a queue which receives messages as they arrive from the websocket connection and format the data as needed, and sends the queue back to the react UI at regular intervals (currently set at 1 second). This stops the rerendering with every message received. I considered swapping to a node app, but after noticing that some other popular trading websites seemed to use React I continued with my chosen technology. 
 
-If I were to do this project again I don't know if I'd take this approach a second time (ask me why :stuck_out_tongue_closed_eyes: )
+If I were to do this project again I don't know if I'd take this same approach a second time (ask me why :stuck_out_tongue_closed_eyes: )
 
 **Research**
 
 When looking at existing trading websites, I noticed they're quite similar, and use a lot of standard diagrams. I even found the specific libs needed to make these charts:
 [Candlestick chart](https://www.scichart.com/example/javascript-chart/javascript-candlestick-chart/),
-[Market depth chart](https://demo.scichart.com/javascript-depth-chart)
+[another candlestick lib](https://www.highcharts.com/demo/stock/depth-chart),
+[Market depth chart](https://demo.scichart.com/javascript-depth-chart),
+[depth chart](https://www.highcharts.com/demo/stock/depth-chart)
 
 The more I looked at these it seemed I was missing some required data to be able to use those specific charts, or it was difficult to tell which data should be used where. Instead I put a simple updating barchart behind the orderbook tables as I'd spent an amount of time trying to find a chart to use.
 
-I definitely plan to look at scicharts again.
+I definitely plan to look at scicharts or highcharts again.
 
 Overall this task was full of challenges, but quite fun to try work through, I'd love to talk to you about it.
 
